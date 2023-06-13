@@ -1,0 +1,7 @@
+.profile {
+  margin-top: 40px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  width: 100%;
+}

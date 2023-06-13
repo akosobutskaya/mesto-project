@@ -1,0 +1,7 @@
+.card__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 0;
+  width: 100%;
+}
