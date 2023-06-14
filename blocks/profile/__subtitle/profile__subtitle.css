@@ -2,11 +2,17 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  max-width: 400px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0;
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 920px) {
   .profile__subtitle {
     margin: 0 auto;
     grid-column: span 2;
+    max-width: 282px;
   }
 }

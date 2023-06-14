@@ -15,8 +15,8 @@
   position: relative;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 900px) {
   .footer {
-    padding-left: 19px;
+      max-width: 581px;
   }
 }

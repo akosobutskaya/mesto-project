@@ -6,6 +6,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  padding-left: 21px;
-  max-width: calc(100% - 51px - 22px);
+  max-width: 200px;
+  margin: 0;
 }

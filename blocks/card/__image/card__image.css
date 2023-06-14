@@ -1,9 +1,21 @@
 .card__image {
-  width: 282px;
+  min-width: 282px;
   height: 282px;
   border-radius: 10px 10px 0 0;
+  object-fit: cover;
   margin: 0;
   padding: 0;
   display: block;
 }
 
+@media screen and (max-width: 705px) {
+  .card__image {
+      max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 705px) {
+  .card__image {
+      max-width: 282px;
+  }
+}

@@ -1,21 +1,23 @@
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px 17px;
   margin-top: 50px;
-  grid-gap: 17px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 900px) {
   .cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-    padding-left: 19px;
+      max-width: 581px;
+      align-items: center;
+      margin: 36px auto;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 700px) {
   .cards-grid {
-    grid-template-columns: 1fr;
-    padding-left: 19px;
+      margin: 36px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
   }
 }
