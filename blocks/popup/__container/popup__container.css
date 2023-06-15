@@ -5,13 +5,13 @@
   border-radius: 10px;
   box-sizing: border-box;
   position: relative;
-  width: 430px;
+  max-width: 430px;
   padding: 34px 36px 37px;
 }
 
 @media screen and (max-width: 660px) {
   .popup__container {
-    min-width: 282px;
+    width: 282px;
     padding: 25px 22px 25px 22px;
     margin-left: 19px;
     margin-right: 19px;
