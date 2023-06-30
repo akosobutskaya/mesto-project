@@ -1,0 +1,14 @@
+.card_liked {
+  background-image: url(../../../images/heard.svg);
+  width: 22px;
+  height: 19px;
+  margin-right: 30px;
+  border: none;
+  background-color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background-image: url(../../../images/heard_active.svg);
+  opacity: 1;
+}
+
