@@ -30,7 +30,8 @@
     <footer class="footer">
       <p class="footer__copyright">© 2023 Mesto Russia</p>
     </footer>
-    <div class="popup popup_closed" id="edit-profile"> <!--popup_opened-->
+    <!--Edit profile-->
+    <div class="popup" id="edit-profile">
       <div class="popup__container">
         <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -45,11 +46,12 @@
         </form>
       </div>
     </div>
-    <div class="popup popup_closed" id="add-mesto"> <!--popup_opened-->
+    <!--Add Mesto-->
+    <div class="popup" id="add-mesto">
       <div class="popup__container">
         <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="edit-form" method="POST" novalidate>
+        <form class="popup__form" name="add-form" method="POST" novalidate>
           <fieldset class="popup__fieldset">
             <input class="popup__input" placeholder="Название" type="text" name="mesto-name" id="mesto-name" minlength="2"
               maxlength="50" value="" required>
@@ -61,7 +63,7 @@
       </div>
     </div>
     <!--Full size card popup-->
-    <div class="popup popup_closed" id="mesto">
+    <div class="popup" id="mesto">
       <div class="popup__mesto">
         <button class="popup__close-button" type="button" aria-label="Закрыть" ></button>
         <img src="" alt="" class="popup__mesto-img">
@@ -80,7 +82,7 @@
     </article>
     </template>
   </div>
-  <script src="script.js"></script>
+  <script src="scripts/script.js"></script>
 </body>
 
 </html>
