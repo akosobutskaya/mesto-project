@@ -28,8 +28,8 @@ const initialCards = [
 const popupEditProf = document.querySelector('.popup#edit-profile');
 const popupAddMesto = document.querySelector('.popup#add-mesto');
 const popupMesto = document.querySelector('.popup#mesto');
-const formEditProf = document.querySelector('[name="edit-form"]');
-const formAddMesto = document.querySelector('[name="add-form"]');
+const formEditProf = document.forms["edit-form"];
+const formAddMesto = document.forms["add-form"];
 const editBtn = document.querySelector('.profile__edit-button');
 const addBtn = document.querySelector('.profile__add-button');
 const popupCloseBtns = document.querySelectorAll('.popup__close-button');
@@ -66,10 +66,11 @@ function handleDelBtn(evt) {
 }
 
 /* Full size image */
-function handlePopupFullSize (evt) {
-  popupMesto.classList.toggle('popup_opened');
-  popupTitle.textContent = evt.target.closest('.card').querySelector('.card__text').textContent;
-  popupImg.src = evt.target.src;
+function handlePopupFullSize (item) {
+  openPopup(popupMesto);
+  popupTitle.textContent = item.name;
+  popupImg.src = item.link;
+  popupImg.alt = item.name;
 }
 
 /* Create new card */
@@ -80,17 +81,16 @@ function createCard(item) {
   cardElement.querySelector('.card__delete').addEventListener('click', handleDelBtn);
   const cardImg = cardElement.querySelector('.card__image');
   cardImg.src = item.link;
-  cardImg.addEventListener('click', handlePopupFullSize);
+  cardImg.alt = item.name;
+  cardImg.addEventListener('click', () => handlePopupFullSize(item));
   return cardElement;
 }
 
 /* Popup Edit Profile */
 function handlePopupEditProf() {
   openPopup(popupEditProf);
-  if (popupEditProf.classList.contains('popup')){
-    userName.value = profileTitle.textContent;
-    userJob.value = profileSubtitle.textContent;
-  }
+  userName.value = profileTitle.textContent;
+  userJob.value = profileSubtitle.textContent;
 }
 
 /* Popup Add Mesto */
@@ -114,15 +114,12 @@ function handleProfileFormSubmit(evt) {
 /* Submit Mesto Form */
 function handleMestoFormSubmit(evt) {
   evt.preventDefault();
-  let card = {};
-  let initialCards = [];
+  const card = {};
   card.name = mestoName.value;
   card.link = mestoSrc.value;
-  initialCards.push(card);
-  renderCards(initialCards);
-  handlePopupAddMesto ();
-  mestoName.value = "";
-  mestoSrc.value = "";
+  renderCards([card]);
+  closePopup(popupAddMesto);
+  evt.target.reset();
 }
 
 function renderCards(initialCards) {
