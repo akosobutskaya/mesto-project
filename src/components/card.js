@@ -1,10 +1,5 @@
 import { openPopup } from "./utils.js";
-
-const popupMesto = document.querySelector('.popup#mesto');
-const popupTitle = popupMesto.querySelector('.popup__mesto-title');
-const popupImg = popupMesto.querySelector('.popup__mesto-img');
-const cardsGrid = document.querySelector('.cards-grid');
-const cardElementTmpl = document.querySelector('.card-template').content.querySelector('.card');
+import { popupMesto, popupTitle, popupImg, cardsGrid, cardElementTmpl } from "./constants.js";
 
 /* Like button */
 function handleLikeBtn(evt) {
