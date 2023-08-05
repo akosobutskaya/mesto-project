@@ -14,7 +14,6 @@ function handleDelBtn(evt) {
 
 /* Full size image */
 function handlePopupFullSize(item) {
-    console.log("handlePopupFullSize");
     openPopup(popupMesto);
     popupTitle.textContent = item.name;
     popupImg.src = item.link;

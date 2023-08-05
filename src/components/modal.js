@@ -1,5 +1,6 @@
 import { openPopup, closePopup } from "./utils.js";
 import { renderCards } from "./card.js";
+import { disableButton } from "./validate.js";
 import { popups, popupEditProf, popupAddMesto, formEditProf, formAddMesto, editBtn, addBtn, popupCloseBtns, profileTitle, profileSubtitle, userName, userJob, mestoName, mestoSrc } from "./constants.js";
 
 /* Popup Edit Profile */
@@ -31,6 +32,7 @@ function handleMestoFormSubmit(evt) {
     renderCards([card]);
     closePopup(popupAddMesto);
     evt.target.reset();
+    disableButton(popupAddMesto,'popup__submit-button_disabled');
 }
 
 export function addPopupEvents() {
