@@ -3,11 +3,15 @@ import "./pages/index.css";
 import { renderCards } from "./components/card.js";
 import { enableValidation } from "./components/validate.js";
 import { addPopupEvents } from "./components/modal.js";
-import { initialCards } from "./components/constants.js";
+import { getCards } from "./components/api.js";
+import { setUserInfo } from "./components/profile.js";
 
-renderCards(initialCards);
+
+setUserInfo();
+const cards = await getCards().then((res) => res);
+
+renderCards(cards);
 addPopupEvents();
-
 enableValidation({
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
