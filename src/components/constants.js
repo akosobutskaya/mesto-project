@@ -26,6 +26,7 @@ export const avatar = document.querySelector(".profile__avatar");
 export const avatarSbmt = document.querySelector(".popup__submit-button#avatar");
 export const mestoSbmt = document.querySelector(".popup__submit-button#add-mesto");
 export const editProfSbmt = document.querySelector(".popup__submit-button#edit-profile");
+export const profile = document.querySelector(".profile");
 
 
 

@@ -3,14 +3,18 @@ import "./pages/index.css";
 import { renderCards } from "./components/card.js";
 import { enableValidation } from "./components/validate.js";
 import { addPopupEvents } from "./components/modal.js";
-import { getCards } from "./components/api.js";
+import { getProfilInfo, getCards } from "./components/api.js";
 import { setUserInfo } from "./components/profile.js";
 
+Promise.all([getProfilInfo(), getCards()])
+  .then(([profileData, cards]) => {
+    setUserInfo(profileData);
+    renderCards(cards);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
-setUserInfo();
-const cards = await getCards().then((res) => res);
-
-renderCards(cards);
 addPopupEvents();
 enableValidation({
   formSelector: ".popup__form",

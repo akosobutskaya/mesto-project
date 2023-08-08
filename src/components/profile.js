@@ -1,10 +1,8 @@
-import { avatar, profileTitle, profileSubtitle} from "./constants.js";
-import { getProfilInfo } from "./api.js";
+import { profile, avatar, profileTitle, profileSubtitle } from "./constants.js";
 
-export const user = await getProfilInfo().then((res) => res);
-
-export function setUserInfo() {
-    profileTitle.textContent = user.name;
-    profileSubtitle.textContent = user.about;
-    avatar.src = user.avatar;
-  }
+export function setUserInfo(profileData) {
+  profileTitle.textContent = profileData.name;
+  profileSubtitle.textContent = profileData.about;
+  avatar.src = profileData.avatar;
+  profile.id = profileData._id;
+}

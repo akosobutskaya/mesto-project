@@ -1,5 +1,3 @@
-import { disableButton } from "./validate.js";
-
 function closeByEscape(e) {
     if (e.key === "Escape") {
         const openedPopup = document.querySelector(".popup_opened");
@@ -17,5 +15,4 @@ export function openPopup(popup) {
 export function closePopup(popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener("keydown", closeByEscape); 
-    const popupSubmit = popup.querySelector('.popup__submit-button');
 }

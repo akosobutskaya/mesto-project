@@ -1,7 +1,3 @@
-import { setLikeCount } from "./card.js"
-import { mestoSbmt, editProfSbmt, avatarSbmt } from "./constants.js";
-import { renderLoading } from "./modal.js";
-
 const config = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-27',
     headers: {
@@ -24,11 +20,11 @@ export function getCards() {
 }
 
 export function patchProfile(profileData) {
-    return fetch(`${config.baseUrl}/users/me`, { method: 'PATCH', headers: config.headers, body: JSON.stringify(profileData) }).then(getData).finally(()=>{renderLoading(editProfSbmt, false);});
+    return fetch(`${config.baseUrl}/users/me`, { method: 'PATCH', headers: config.headers, body: JSON.stringify(profileData) }).then(getData);
 }
 
 export function postNewCard(cardData) {
-    return fetch(`${config.baseUrl}/cards `, { method: 'POST', headers: config.headers, body: JSON.stringify(cardData) }).then(getData).finally(()=>{renderLoading(mestoSbmt, false);});
+    return fetch(`${config.baseUrl}/cards `, { method: 'POST', headers: config.headers, body: JSON.stringify(cardData) }).then(getData);
 }
 
 export function deleteCard(cardId) {
@@ -36,15 +32,15 @@ export function deleteCard(cardId) {
 }
 
 export function likeCard(card) {
-    return fetch(`${config.baseUrl}/cards/likes/${card.id}`, { method: 'PUT', headers: config.headers }).then(getData).then((res) => {setLikeCount(card,res.likes.length,res.likes)});
+    return fetch(`${config.baseUrl}/cards/likes/${card.id}`, { method: 'PUT', headers: config.headers }).then(getData);
 }
 
 export function unLikeCard(card) {
-    return fetch(`${config.baseUrl}/cards/likes/${card.id}`, { method: 'DELETE', headers: config.headers }).then(getData).then((res) => {setLikeCount(card,res.likes.length,res.likes)});
+    return fetch(`${config.baseUrl}/cards/likes/${card.id}`, { method: 'DELETE', headers: config.headers }).then(getData);
 }
 
-export function setAvatar(url) {
-    return fetch(`${config.baseUrl}/users/me/avatar`, { method: 'PATCH', headers: config.headers, body: `{"avatar": "${url}"}`}).then(getData).finally(()=>{renderLoading(avatarSbmt, false);});
+export function setAvatar(data) {
+    return fetch(`${config.baseUrl}/users/me/avatar`, { method: 'PATCH', headers: config.headers, body: JSON.stringify(data) }).then(getData);
 }
 
 

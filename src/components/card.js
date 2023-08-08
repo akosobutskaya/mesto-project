@@ -1,31 +1,47 @@
 import { openPopup } from "./utils.js";
-import { popupMesto, popupTitle, popupImg, cardsGrid, cardElementTmpl } from "./constants.js";
-import { user } from "./profile.js";
+import { profile, profileTitle, popupMesto, popupTitle, popupImg, cardsGrid, cardElementTmpl } from "./constants.js";
 import { deleteCard, likeCard, unLikeCard } from "./api.js";
 
-function setLiked (like) {
+function setLiked(like) {
     like.classList.add('card_liked');
 }
 
-function setUnliked (like) {
+function setUnliked(like) {
     like.classList.remove('card_liked');
 }
 
-function setLikedbyowner (card, value) {
-    card.setAttribute('likedbyowner',value);
+function setLikedbyUser(card, value) {
+    card.setAttribute('likedbyuser', value);
+}
+
+function isLikedByUser(likes) {
+    return likes.some(like => like['name'] === profileTitle.textContent);
 }
 
 /* Like button */
 function handleLikeBtn(evt) {
     const card = evt.target.closest('.card');
-    card.getAttribute('likedbyowner') == "true" ?  unLikeCard(card) : likeCard(card);
+    const cardLike = evt.target.closest('.card__like');
+    card.getAttribute('likedbyuser') == "true" ?
+        unLikeCard(card)
+            .then((res) => {
+                setLikeCount(card, res.likes.length, res.likes);
+                setLikedbyUser(card, false);
+                setUnliked(cardLike);
+            })
+        : likeCard(card)
+            .then((res) => {
+                setLikeCount(card, res.likes.length, res.likes);
+                setLikedbyUser(card, true);
+                setLiked(cardLike);
+            });
+    setLiked(cardLike);
 }
 
 /* Delete card button */
 function handleDelBtn(evt) {
     const card = evt.target.closest('.card');
-    card.remove();
-    deleteCard(card.id);
+    deleteCard(card.id).then(card.remove());
 }
 
 /* Full size image */
@@ -36,16 +52,12 @@ function handlePopupFullSize(item) {
     popupImg.alt = item.name;
 }
 
-export function setLikeCount (cardElement, count, likes) {
+export function setLikeCount(cardElement, count, likes) {
     const cardLikeCountElement = cardElement.querySelector('.card__like-count');
-    const cardLikeElement = cardElement.querySelector('.card__like');
     cardLikeCountElement.textContent = count;
-    count > 0 ? setLiked(cardLikeElement) : setUnliked(cardLikeElement);
-    if (likes)  setLikedbyowner (cardElement, likes.some( like => like['name'] === user.name ));
-
 }
 
-function addDeleteBtn (cardElement) {
+function addDeleteBtn(cardElement) {
     const deleteBtn = cardElement.querySelector('.card__delete');
     deleteBtn.removeAttribute('hidden');
     deleteBtn.addEventListener('click', handleDelBtn);
@@ -56,7 +68,7 @@ function createCard(item) {
     const cardElement = cardElementTmpl.cloneNode(true);
     const cardLike = cardElement.querySelector('.card__like');
     cardElement.id = item._id;
-    cardElement.setAttribute('likedbyowner', item.likes.some( like => like['name'] === user.name ));
+    setLikedbyUser(cardElement, isLikedByUser(item.likes));
     cardElement.querySelector('.card__text').textContent = item.name;
     cardElement.querySelector('.card__delete').addEventListener('click', handleDelBtn);
     cardLike.addEventListener('click', handleLikeBtn);
@@ -65,10 +77,10 @@ function createCard(item) {
     cardImg.alt = item.name;
     cardImg.addEventListener('click', () => handlePopupFullSize(item));
     if (item.likes) {
-        setLikeCount (cardElement, item.likes.length);
-        (item.likes.length > 0) ? setLiked(cardLike) : setUnliked(cardLike);
+        setLikeCount(cardElement, item.likes.length);
+        (isLikedByUser(item.likes)) ? setLiked(cardLike) : setUnliked(cardLike);
     }
-    if (!item.owner || item.owner._id === user._id) addDeleteBtn (cardElement)
+    if (!item.owner || item.owner._id === profile.id) addDeleteBtn(cardElement)
     return cardElement;
 }
 
