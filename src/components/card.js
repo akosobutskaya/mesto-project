@@ -29,19 +29,28 @@ function handleLikeBtn(evt) {
                 setLikedbyUser(card, false);
                 setUnliked(cardLike);
             })
+            .catch((err) => {
+                console.error(`Ошибка: ${err}`);
+            })
         : likeCard(card)
             .then((res) => {
                 setLikeCount(card, res.likes.length, res.likes);
                 setLikedbyUser(card, true);
                 setLiked(cardLike);
+            })
+            .catch((err) => {
+                console.error(`Ошибка: ${err}`);
             });
-    setLiked(cardLike);
 }
 
 /* Delete card button */
 function handleDelBtn(evt) {
     const card = evt.target.closest('.card');
-    deleteCard(card.id).then(card.remove());
+    deleteCard(card.id)
+        .then(() => card.remove())
+        .catch((err) => {
+            console.error(`Ошибка: ${err}`);
+        });
 }
 
 /* Full size image */
