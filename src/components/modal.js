@@ -28,9 +28,6 @@ function handleProfileFormSubmit(evt) {
                 profileTitle.textContent = userData.name;
                 profileSubtitle.textContent = userData.about;
                 closePopup(popupEditProf);
-            })
-            .catch((err) => {
-                console.error(`Ошибка: ${err}`);
             });
     }
     handleSubmit(makeRequest, evt);
@@ -43,9 +40,6 @@ function handleMestoFormSubmit(evt) {
             .then((card) => {
                 closePopup(popupAddMesto);
                 renderCards([card]);
-            })
-            .catch((err) => {
-                console.error(`Ошибка: ${err}`);
             });
     }
     handleSubmit(makeRequest, evt);
@@ -57,9 +51,6 @@ function handleEditAvatarSubmit(evt) {
             .then((res) => {
                 avatar.src = res.avatar;
                 closePopup(popupEditAvatar);
-            })
-            .catch((err) => {
-                console.error(`Ошибка: ${err}`);
             });
     }
     handleSubmit(makeRequest, evt);
