@@ -5,12 +5,15 @@ import { FormValidator } from "./components/FormValidator.js";
 import { addPopupEvents } from "./components/modal.js";
 import { getProfilInfo, getCards } from "./components/api.js";
 import { setUserInfo } from "./components/profile.js";
-import { validationConfig } from "./components/constants.js"
+import { cardsGrid, validationConfig } from "./components/constants.js"
+import Section from "./components/card.js"
+import Card from "./components/card.js"
+
 
 Promise.all([getProfilInfo(), getCards()])
   .then(([profileData, cards]) => {
     setUserInfo(profileData);
-    renderCards(cards);
+    cardsList.renderItems(cards);
   })
   .catch(err => {
     console.log(err);
@@ -25,5 +28,13 @@ formList.forEach((formElement) => {
   formValidator.enableValidation();
 });
 
-//test feature push
-//test 2
+// New section for list of cards
+
+const cardsList = new Section({
+  data: items,
+  renderer: (item) => {
+    const card = new Card(item, '.card-template');
+    const cardElement = card.generate();
+    cardsList.addItem(cardElement);
+  }
+}, cardsGrid);
