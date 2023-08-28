@@ -28,5 +28,16 @@ export const mestoSbmt = document.querySelector(".popup__submit-button#add-mesto
 export const editProfSbmt = document.querySelector(".popup__submit-button#edit-profile");
 export const profile = document.querySelector(".profile");
 
+export const validationConfig = {
+    formSelector: ".popup__form",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__submit-button",
+    inactiveButtonClass: "popup__submit-button_disabled",
+    inputErrorClass: "popup__input-error",
+    errorClass: "popup__input-error_active",
+};
+
+
+
 
 

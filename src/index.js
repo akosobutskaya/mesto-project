@@ -1,10 +1,11 @@
 
 import "./pages/index.css";
 import { renderCards } from "./components/card.js";
-import { enableValidation } from "./components/validate.js";
+import { FormValidator } from "./components/FormValidator.js";
 import { addPopupEvents } from "./components/modal.js";
 import { getProfilInfo, getCards } from "./components/api.js";
 import { setUserInfo } from "./components/profile.js";
+import { validationConfig } from "./components/constants.js"
 
 Promise.all([getProfilInfo(), getCards()])
   .then(([profileData, cards]) => {
@@ -16,13 +17,12 @@ Promise.all([getProfilInfo(), getCards()])
   });
 
 addPopupEvents();
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit-button",
-  inactiveButtonClass: "popup__submit-button_disabled",
-  inputErrorClass: "popup__input-error",
-  errorClass: "popup__input-error_active",
+
+// Validation
+const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
+formList.forEach((formElement) => {
+  const formValidator = new FormValidator(validationConfig, formElement);
+  formValidator.enableValidation();
 });
 
 //test feature push
