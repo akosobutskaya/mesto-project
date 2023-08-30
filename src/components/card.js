@@ -1,5 +1,13 @@
 export class Card {
-  constructor({ data, cardTemplate, userId, handleCardClick, handleAddLike, handleRemoveLike, handleDelBtn  }) {
+  constructor({
+    data,
+    cardTemplate,
+    userId,
+    handleCardClick,
+    handleAddLike,
+    handleRemoveLike,
+    handleDelBtn,
+  }) {
     this._name = data.name;
     this._link = data.link;
     this._cardId = data._id;
@@ -8,6 +16,9 @@ export class Card {
     this._cardTemplate = cardTemplate;
     this._likes = data.likes;
     this._handleCardClick = handleCardClick;
+    this._handleAddLike = handleAddLike;
+    this._handleRemoveLike = handleRemoveLike;
+    this._handleDelBtn = handleDelBtn;
   }
 
   //   Get card template
@@ -38,18 +49,35 @@ export class Card {
     this._cardLikeCountElement.textContent = this._likes.length;
   }
 
+  _likeToggle() {
+    if (this._likeBtn.classList.contains("card_liked")) {
+      this._handleRemoveLike();
+    } else {
+      this._handleAddLike();
+    }
+  }
+
   // Set card isteners
   _setEventListeners() {
     this._cardImage.addEventListener("click", () => {
-      this._handleCardClick(this._name, this._link);
+      this._handleCardClick({ name: this._name, link: this._link });
     });
+    this._likeBtn.addEventListener("click", () => {
+      this._likeToggle();
+    });
+
+    if (this._cardOwnerId === this._userId.id) {
+      this._deleteBtn.addEventListener("click", () => {
+        this._handleDelBtn(this._cardId);
+      });
+    }
   }
 
   //   Show delete button if user is a card owner
   _hasDeleteButton() {
     if (this._cardOwnerId === this._userId.id) {
-      const deleteBtn = this._cardElement.querySelector(".card__delete");
-      deleteBtn.removeAttribute("hidden");
+      this._deleteBtn = this._cardElement.querySelector(".card__delete");
+      this._deleteBtn.removeAttribute("hidden");
     }
   }
 
@@ -70,15 +98,6 @@ export class Card {
     return this._cardElement;
   }
 }
-
-export function renderCards(initialsCards) {
-    initialsCards.forEach((item) => {
-        cardsGrid.prepend()
-    })
-}
-
-
-
 
 /* import { openPopup } from "./utils.js";
 import {
@@ -189,5 +208,3 @@ export function renderCards(initialCards) {
     cardsGrid.prepend(createCard(item));
   });
 } */
-
-
