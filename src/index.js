@@ -37,7 +37,17 @@ formList.forEach((formElement) => {
   formValidator.enableValidation();
 });
 
-<<<<<<< HEAD
+//addPopupEvents();
+
+const api = new Api(apiData);
+
+// Validation
+const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
+formList.forEach((formElement) => {
+  const formValidator = new FormValidator(validationConfig, formElement);
+  formValidator.enableValidation();
+});
+
 // Popup
 const popupImage = new PopupWithImage(popupImageSelector);
 
@@ -72,7 +82,8 @@ editBtn.addEventListener('click', () => {
   setProfileFormData();
   popupEditProfile.open();
 });
-=======
+
+
 // New section for list of cards
 
 const cardsList = new Section({
@@ -83,4 +94,3 @@ const cardsList = new Section({
     cardsList.addItem(cardElement);
   }
 }, cardsGrid);
->>>>>>> 7124a7abd12135d0240e2edb240f9a97c6cfee1d
