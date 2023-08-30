@@ -1,3 +1,66 @@
+export class Api {
+    constructor({ baseUrl, headers }) {
+        this._baseUrl = baseUrl;
+        this._headers = headers;
+    }
+
+    _getData(res) {
+        if (res.ok) return res.json();
+        return Promise.reject(`Ошибка: ${res.status}`);
+    }
+
+    getProfilInfo() {
+        return fetch(`${this._baseUrl}/users/me`, { headers: this._headers }).then(this._getData);
+    }
+
+    getCards() {
+        return fetch(`${this._baseUrl}/cards`, { headers: this._headers }).then(this._getData);
+    }
+
+    patchProfile(profileData) {
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: 'PATCH', headers: this._headers,
+            body: JSON.stringify(profileData)
+        }).then(this._getData);
+    }
+
+    postNewCard(cardData) {
+        return fetch(`${this._baseUrl}/cards `, {
+            method: 'POST', headers: this._headers, body: JSON.stringify(cardData)
+        }).then(this._getData);
+    }
+
+    deleteCard(cardId) {
+        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+            method: 'DELETE', headers: this._headers
+        }).then(this._getData);
+    }
+
+    likeCard(card) {
+        return fetch(`${this._baseUrl}/cards/likes/${card.id}`, {
+            method: 'PUT', headers: this._headers
+        }).then(this._getData);
+    }
+
+    unLikeCard(card) {
+        return fetch(`${this._baseUrl}/cards/likes/${card.id}`, {
+            method: 'DELETE', headers: this._headers
+        }).then(this._getData);
+    }
+
+    setAvatar(data) {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
+            method: 'PATCH', headers: this._headers, body: JSON.stringify(data)
+        }).then(this._getData);
+    }
+
+    loadData() {
+        return Promise.all([this.getUserInfo(), this.getCards()]);
+    }
+
+}
+
+/*
 const config = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-27',
     headers: {
@@ -43,4 +106,4 @@ export function setAvatar(data) {
     return fetch(`${config.baseUrl}/users/me/avatar`, { method: 'PATCH', headers: config.headers, body: JSON.stringify(data) }).then(getData);
 }
 
-
+*/

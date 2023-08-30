@@ -1,4 +1,15 @@
 export const popupMesto = document.querySelector('.popup#mesto');
+
+export const popupImageSelector = '.popup#mesto';
+export const popupEditProfileSelector = '.popup#edit-profile';
+export const apiData = {
+    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-27',
+    headers: {
+        authorization: '945d8c08-a2b0-4b31-8bc8-ff311437b5f8',
+        'Content-Type': 'application/json'
+    }
+};
+
 export const popupTitle = popupMesto.querySelector('.popup__mesto-title');
 export const popupImg = popupMesto.querySelector('.popup__mesto-img');
 export const cardsGrid = document.querySelector('.cards-grid');
