@@ -1,52 +1,34 @@
 import "./pages/index.css";
-import { renderCards } from "./components/card.js";
 import { FormValidator } from "./components/FormValidator.js";
 import { PopupWithImage } from "./components/PopupWithImage.js";
 import { PopupWithForm } from "./components/PopupWithForm.js";
 import { Api } from "./components/Api.js";
-import { setUserInfo } from "./components/profile.js";
 import {
   validationConfig, popupImageSelector, popupEditProfileSelector,
-  apiData, editBtn, userName, userJob
+  apiData, editBtn, userName, userJob,
+  userNameSelector,
+  userInfoSelector,
+  addBtn,
+  userAvatarSelector, avatarEditBtn, popupEditAvatarSelector, popupAddNewCardSelector
 } from "./components/constants.js"
 import { Section } from "./components/section.js"
 import { Card } from "./components/card.js"
-
-/*------------------------------- Убрать после перехода на Api----------*/
-const config = {
-    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-27',
-    headers: {
-        authorization: '945d8c08-a2b0-4b31-8bc8-ff311437b5f8',
-        'Content-Type': 'application/json'
-    }
-}
-
-const getData = (res) => {
-  if (res.ok) return res.json();
-  return Promise.reject(`Ошибка: ${res.status}`);
-}
-
-function getProfilInfo() {
-  return fetch(`${config.baseUrl}/users/me`, { headers: config.headers }).then(getData);
-}
-
-function getCards() {
-  return fetch(`${config.baseUrl}/cards`, { headers: config.headers }).then(getData);
-}
-
-/*------------------------------------------------------------*/
-Promise.all([getProfilInfo(), getCards()])
-  .then(([profileData, cards]) => {
-    setUserInfo(profileData);
-    cardsList.renderItems(cards);
-  })
-  .catch(err => {
-    console.log(err);
-  });
-
-//addPopupEvents();
+import { UserInfo } from "./components/UserInfo.js"
 
 const api = new Api(apiData);
+const userInfo = new UserInfo(
+  userNameSelector,
+  userInfoSelector,
+  userAvatarSelector
+);
+
+api.loadData()
+  .then(data => {
+    const [userData, cardsData] = data;
+    userInfo.setUserInfo(userData);
+    //здесь нужен рендер cards
+  })
+  .catch(err => console.log(err));
 
 // Validation
 const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
@@ -63,7 +45,7 @@ const editProfileSubmitCallback = data => {
   popupEditProfile.setBtnStatusSaving(true);
   api.patchProfile(data)
     .then(res => {
-      // set userInfo
+      userInfo.setUserInfo(res);
       popupEditProfile.close();
     })
     .catch(err => {
@@ -80,7 +62,7 @@ const popupEditProfile = new PopupWithForm(
 );
 
 const setProfileFormData = () => {
-  const userData = { name: "11", about: "222" }//getUserInfo();
+  const userData = userInfo.getUserInfo();
   userName.value = userData.name;
   userJob.value = userData.about;
 };
@@ -90,6 +72,58 @@ editBtn.addEventListener('click', () => {
   popupEditProfile.open();
 });
 
+//---------------------- Edit Avatar//
+
+const editAvatarSubmitCallback = data => {
+  popupEditAvatar.setBtnStatusSaving(true);
+  api.setAvatar(data)
+    .then(res => {
+      userInfo.setUserInfo(res);
+      popupEditAvatar.close();
+    })
+    .catch(err => {
+      console.log('Ошибка редактирования аватара', err);
+    })
+    .finally(() => {
+      popupEditAvatar.setBtnStatusSaving(false);
+    });
+};
+
+const popupEditAvatar = new PopupWithForm(
+  popupEditAvatarSelector,
+  editAvatarSubmitCallback
+);
+
+avatarEditBtn.addEventListener('click', () => {
+  popupEditAvatar.open();
+});
+
+//-------------------------------- Add new card---//
+const addNewCardSubmitCallback = data => {
+  popupAddNewCard.setBtnStatusSaving(true);
+  api.postNewCard(data)
+    .then(res => {
+      //здесь должен быть card.addItem, видимо
+      popupAddNewCard.close();
+    })
+    .catch(err => {
+      console.log('Ошибка добавления новой карточки', err);
+    })
+    .finally(() => {
+      popupAddNewCard.setBtnStatusSaving(false);
+    });
+};
+
+const popupAddNewCard = new PopupWithForm(
+  popupAddNewCardSelector,
+  addNewCardSubmitCallback
+);
+
+addBtn.addEventListener('click', () => {
+  popupAddNewCard.open();
+});
+
+//--------------------------------//
 
 // New section for list of cards
 

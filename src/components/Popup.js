@@ -15,7 +15,7 @@ export class Popup {
         if (
             evt.target.classList.contains('popup') ||
             evt.target.classList.contains('popup__close-button')
-        ) {console.log('_handleClickClose');
+        ) {
             this.close();
         }
     }
@@ -27,7 +27,6 @@ export class Popup {
     }
 
     close() {
-        console.log("this._popup");
         this._popup.classList.remove('popup_opened');
     }
 
@@ -39,6 +38,6 @@ export class Popup {
     _removeEventListeners() {
         this._popup.removeEventListener('click', this._handleClickClose);
         document.removeEventListener('keydown', this._handleEscClose);
-      }
+    }
 
 }

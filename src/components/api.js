@@ -55,7 +55,7 @@ export class Api {
     }
 
     loadData() {
-        return Promise.all([this.getUserInfo(), this.getCards()]);
+        return Promise.all([this.getProfilInfo(), this.getCards()]);
     }
 
 }
