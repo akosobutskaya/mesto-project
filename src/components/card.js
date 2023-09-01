@@ -24,7 +24,7 @@ export class Card {
   //   Get card template
   _getElement() {
     const cardElement = document
-      .querySelector(this._selector)
+      .querySelector(this._cardTemplate)
       .content.querySelector(".card")
       .cloneNode("true");
 
@@ -49,7 +49,7 @@ export class Card {
     this._cardLikeCountElement.textContent = this._likes.length;
   }
 
-  _likeToggle() {
+  likeToggle() {
     if (this._likeBtn.classList.contains("card_liked")) {
       this._handleRemoveLike();
     } else {
@@ -96,6 +96,10 @@ export class Card {
     this._setEventListeners();
 
     return this._cardElement;
+  }
+
+  deleteCard() {
+    this._cardElement.remove();
   }
 }
 
