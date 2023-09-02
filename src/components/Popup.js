@@ -3,6 +3,7 @@ export class Popup {
         this._popupSelector = popupSelector;
         this._popup = document.querySelector(popupSelector);
         this._handleClickClose = this._handleClickClose.bind(this);
+        this._handleEscClose = this._handleEscClose.bind(this);
     }
 
     _handleEscClose(evt) {
@@ -21,7 +22,6 @@ export class Popup {
     }
 
     open() {
-        console.log("open");
         this._setEventListeners();
         this._popup.classList.add('popup_opened');
     }
