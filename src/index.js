@@ -142,6 +142,7 @@ const addNewCardSubmitCallback = data => {
   popupAddNewCard.setBtnStatusSaving(true);
   api.postNewCard(data)
     .then(res => {
+      cardsList.addItem(data);
       //здесь должен быть card.addItem, видимо
       popupAddNewCard.close();
     })
