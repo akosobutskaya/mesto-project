@@ -49,11 +49,11 @@ export class Card {
     this._cardLikeCountElement.textContent = this._likes.length;
   }
 
-  likeToggle() {
+  likeToggle(data) {
     if (this._likeBtn.classList.contains("card_liked")) {
-      this._handleRemoveLike();
+      this._handleRemoveLike(this._cardId);
     } else {
-      this._handleAddLike();
+      this._handleAddLike(this._cardId);
     }
   }
 

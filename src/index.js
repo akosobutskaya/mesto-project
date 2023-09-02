@@ -85,9 +85,9 @@ const createCard = (cardData) => {
     handleCardClick: (data) => {
       PopupWithImage.open(data);
     },
-    handleAddLike: (card) => {
+    handleAddLike: (cardData) => {
       api
-        .likeCard(card)
+        .likeCard(cardData)
         .then((data) => {
           newCard.likeToggle(data);
         })
