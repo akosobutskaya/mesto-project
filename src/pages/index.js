@@ -1,19 +1,16 @@
-import "./pages/index.css";
-import { FormValidator } from "./components/FormValidator.js";
-import { PopupWithImage } from "./components/PopupWithImage.js";
-import { PopupWithForm } from "./components/PopupWithForm.js";
-import { Api } from "./components/Api.js";
+import "./index.css";
+import { FormValidator } from "../components/FormValidator.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { Api } from "../components/Api.js";
 import {
   validationConfig, popupImageSelector, popupEditProfileSelector,
-  apiData, editBtn, userName, userJob,
-  userNameSelector,
-  userInfoSelector,
-  addBtn,
-  userAvatarSelector, avatarEditBtn, popupEditAvatarSelector, popupAddNewCardSelector
-} from "./components/constants.js"
-import { Section } from "./components/section.js"
-import { Card } from "./components/card.js"
-import { UserInfo } from "./components/UserInfo.js"
+  apiData, editBtn, userName, userJob, userNameSelector, userInfoSelector,
+  addBtn, userAvatarSelector, avatarEditBtn, popupEditAvatarSelector, popupAddNewCardSelector
+} from "../utils/constants.js"
+import { Section } from "../components/section.js"
+import { Card } from "../components/card.js"
+import { UserInfo } from "../components/UserInfo.js"
 
 let userId;
 
@@ -42,7 +39,7 @@ formList.forEach((formElement) => {
   formValidator.enableValidation();
 });
 
-// Popup
+// PopupWithImage
 const popupImage = new PopupWithImage(popupImageSelector);
 
 // Edit Profile
@@ -83,7 +80,7 @@ const createCard = (cardData) => {
     cardTemplate: ".card-template",
     userId: userId,
     handleCardClick: (data) => {
-      PopupWithImage.open(data);
+      popupImage.open(data);
     },
     handleAddLike: (card) => {
       api
@@ -106,13 +103,13 @@ const createCard = (cardData) => {
         });
     },
     handleDelBtn: (cardId) => {
-      api.deleteCard(cardId).then(() => {});
+      api.deleteCard(cardId).then(() => { });
     },
   });
   return newCard.generate();
 };
-//---------------------- Edit Avatar//
 
+//Edit Avatar
 const editAvatarSubmitCallback = data => {
   popupEditAvatar.setBtnStatusSaving(true);
   api.setAvatar(data)
@@ -137,12 +134,12 @@ avatarEditBtn.addEventListener('click', () => {
   popupEditAvatar.open();
 });
 
-//-------------------------------- Add new card---//
+//Add new card
 const addNewCardSubmitCallback = data => {
   popupAddNewCard.setBtnStatusSaving(true);
   api.postNewCard(data)
     .then(res => {
-      //здесь должен быть card.addItem, видимо
+      cardsList.renderItems([res]);
       popupAddNewCard.close();
     })
     .catch(err => {
@@ -161,8 +158,6 @@ const popupAddNewCard = new PopupWithForm(
 addBtn.addEventListener('click', () => {
   popupAddNewCard.open();
 });
-
-//--------------------------------//
 
 // New section for list of cards
 

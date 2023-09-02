@@ -42,9 +42,9 @@ export class PopupWithForm extends Popup {
 
     setBtnStatusSaving(isLoading) {
         if (isLoading) {
-            this._btnName.value = 'Сохранение...';
+            this._btnName.textContent = 'Сохранение...';
         } else {
-            this._btnName.value = this._defaultText;
+            this._btnName.textContent = this._defaultText;
         }
     }
 }
