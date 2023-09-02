@@ -40,13 +40,13 @@
         <form class="popup__form" name="edit-form" method="POST" novalidate>
           <fieldset class="popup__fieldset">
             <label>
-              <input class="popup__input" placeholder="Имя" type="text" name="user-name" id="user-name" minlength="2"
+              <input class="popup__input" placeholder="Имя" type="text" name="name" id="user-name" minlength="2"
                 maxlength="40" value="" required pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
                 data-error-message="Разрешены только латинские и кириллические буквы, знаки дефиса и пробелы">
               <span class="user-name-error popup__input-error"></span>
             </label>
             <label>
-              <input class="popup__input" placeholder="О себе" type="text" name="user-info" id="user-job" minlength="2"
+              <input class="popup__input" placeholder="О себе" type="text" name="about" id="user-job" minlength="2"
                 maxlength="200" value="" required pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
                 data-error-message="Разрешены только латинские и кириллические буквы, знаки дефиса и пробелы">
               <span class="user-job-error popup__input-error"></span>
@@ -64,13 +64,13 @@
         <form class="popup__form" name="add-form" method="POST" novalidate>
           <fieldset class="popup__fieldset">
             <label>
-              <input class="popup__input" placeholder="Название" type="text" name="mesto-name" id="mesto-name"
+              <input class="popup__input" placeholder="Название" type="text" name="name" id="mesto-name"
                 minlength="2" maxlength="30" value="" required pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
                 data-error-message="Разрешены только латинские и кириллические буквы, знаки дефиса и пробелы">
               <span class="mesto-name-error popup__input-error"></span>
             </label>
             <label>
-              <input class="popup__input" placeholder="Ссылка на картинку" type="url" name="mesto-src" id="mesto-src"
+              <input class="popup__input" placeholder="Ссылка на картинку" type="url" name="link" id="mesto-src"
                 value="" required>
               <span class="mesto-src-error popup__input-error"></span>
             </label>
@@ -87,7 +87,7 @@
         <form class="popup__form" name="edit-avatar" method="POST" novalidate>
           <fieldset class="popup__fieldset">
             <label>
-              <input class="popup__input" placeholder="Ссылка на картинку" type="url" name="avatar-src" id="avatar-src"
+              <input class="popup__input" placeholder="Ссылка на картинку" type="url" name="avatar" id="avatar-src"
                 value="" required>
               <span class="avatar-src-error popup__input-error"></span>
             </label>

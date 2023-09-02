@@ -9,6 +9,12 @@ export const apiData = {
         'Content-Type': 'application/json'
     }
 };
+export const userNameSelector = '.profile__title';
+export const userInfoSelector = '.profile__subtitle';
+export const userAvatarSelector = '.profile__avatar';
+
+export const popupEditAvatarSelector = '.popup#edit-avatar';
+export const popupAddNewCardSelector = '.popup#add-mesto';
 
 export const popupTitle = popupMesto.querySelector('.popup__mesto-title');
 export const popupImg = popupMesto.querySelector('.popup__mesto-img');
