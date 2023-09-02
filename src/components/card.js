@@ -57,13 +57,13 @@ export class Card {
     }
   }
 
-  // Set card isteners
+  // Set card listeners
   _setEventListeners() {
     this._cardImage.addEventListener("click", () => {
       this._handleCardClick({ name: this._name, link: this._link });
     });
     this._likeBtn.addEventListener("click", () => {
-      this._likeToggle();
+      this.likeToggle();
     });
 
     if (this._cardOwnerId === this._userId.id) {

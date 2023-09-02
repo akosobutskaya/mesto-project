@@ -15,6 +15,8 @@ import { Section } from "./components/section.js"
 import { Card } from "./components/card.js"
 import { UserInfo } from "./components/UserInfo.js"
 
+let userId;
+
 const api = new Api(apiData);
 const userInfo = new UserInfo(
   userNameSelector,
@@ -25,9 +27,9 @@ const userInfo = new UserInfo(
 api.loadData()
   .then(data => {
     const [userData, cardsData] = data;
+    userId = userData._id;
     userInfo.setUserInfo(userData);
     cardsList.renderItems(cardsData);
-    //здесь нужен рендер cards - выполнено
   })
   .catch(err => console.log(err));
 
