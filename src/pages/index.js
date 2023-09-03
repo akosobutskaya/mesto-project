@@ -8,8 +8,8 @@ import {
   apiData, editBtn, userName, userJob, userNameSelector, userInfoSelector,
   addBtn, userAvatarSelector, avatarEditBtn, popupEditAvatarSelector, popupAddNewCardSelector
 } from "../utils/constants.js"
-import { Section } from "../components/section.js"
-import { Card } from "../components/card.js"
+import { Section } from "../components/Section.js"
+import { Card } from "../components/Card.js"
 import { UserInfo } from "../components/UserInfo.js"
 
 let userId;

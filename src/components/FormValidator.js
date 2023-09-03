@@ -1,7 +1,7 @@
 export class FormValidator {
     constructor(config, formItem) {
-        this.config = config;
-        this.formItem = formItem;
+        this._config = config;
+        this._formItem = formItem;
     }
 
     _showInputError(formElement, inputElement, errorMessage, config) {
@@ -75,10 +75,10 @@ export class FormValidator {
     };
 
     enableValidation() {
-        this.formItem.addEventListener('submit', (evt) => {
+        this._formItem.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
-        this._setEventListeners(this.formItem, this.config);
+        this._setEventListeners(this._formItem, this._config);
     }
 
 }
