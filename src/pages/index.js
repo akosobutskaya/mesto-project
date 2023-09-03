@@ -82,9 +82,9 @@ const createCard = (cardData) => {
     handleCardClick: (data) => {
       popupImage.open(data);
     },
-    handleAddLike: (cardData) => {
+    handleAddLike: (cardId) => {
       api
-        .likeCard(cardData)
+        .likeCard(cardId)
         .then((data) => {
           newCard.likeToggle(data);
         })
@@ -92,9 +92,9 @@ const createCard = (cardData) => {
           console.log(`Ошибка ${err}`);
         });
     },
-    handleRemoveLike: (card) => {
+    handleRemoveLike: (cardId) => {
       api
-        .unLikeCard(card)
+        .unLikeCard(cardId)
         .then((data) => {
           newCard.likeToggle(data);
         })

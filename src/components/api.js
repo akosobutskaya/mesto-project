@@ -36,14 +36,14 @@ export class Api {
         }).then(this._getData);
     }
 
-    likeCard(card) {
-        return fetch(`${this._baseUrl}/cards/likes/${card.id}`, {
+    likeCard(cardId) {
+        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
             method: 'PUT', headers: this._headers
         }).then(this._getData);
     }
 
-    unLikeCard(card) {
-        return fetch(`${this._baseUrl}/cards/likes/${card.id}`, {
+    unLikeCard(cardId) {
+        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
             method: 'DELETE', headers: this._headers
         }).then(this._getData);
     }

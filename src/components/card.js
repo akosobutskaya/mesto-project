@@ -35,7 +35,7 @@ export class Card {
   _isLikedByUser() {
     if (
       this._likes.some((user) => {
-        this._userId === user._id;
+        this._userId === this._ownerId;
       })
     ) {
       this._likeBtn.classList.add("card_liked");
@@ -49,11 +49,13 @@ export class Card {
     this._cardLikeCountElement.textContent = this._likes.length;
   }
 
-  likeToggle(data) {
+  likeToggle() {
     if (this._likeBtn.classList.contains("card_liked")) {
       this._handleRemoveLike(this._cardId);
+      this._likeBtn.classList.remove("card_liked");
     } else {
       this._handleAddLike(this._cardId);
+      this._likeBtn.classList.add("card_liked");
     }
   }
 
@@ -75,7 +77,7 @@ export class Card {
 
   //   Show delete button if user is a card owner
   _hasDeleteButton() {
-    if (this._cardOwnerId === this._userId.id) {
+    if (this._cardOwnerId === this._userId) {
       this._deleteBtn = this._cardElement.querySelector(".card__delete");
       this._deleteBtn.removeAttribute("hidden");
     }
