@@ -16,3 +16,8 @@
 **GitHub Pages**
 
 * [Ссылка на GitHub Pages](https://akosobutskaya.github.io/mesto-project/)
+
+**Co-developers**
+
+* [Victor Voronkov(victorv1986@yandex.ru)](https://github.com/VictorV77)
+
