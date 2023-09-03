@@ -33,31 +33,21 @@ export class Card {
 
   //   Does user is a 'like' owner
   _isLikedByUser() {
-    if (
-      this._likes.some((user) => {
-        this._userId === this._ownerId;
-      })
-    ) {
-      this._likeBtn.classList.add("card_liked");
+      if (this._likes.some(like => like._id === this._userId)) {
+        this._likeBtn.classList.add("card_liked");
+      };
     }
-  }
 
   //   Show like counter
   _setLikeCount() {
-    this._cardLikeCountElement =
-      this._cardElement.querySelector(".card__like-count");
     this._cardLikeCountElement.textContent = this._likes.length;
   }
 
-  likeToggle() {
-    if (this._likeBtn.classList.contains("card_liked")) {
-      this._handleRemoveLike(this._cardId);
-      this._likeBtn.classList.remove("card_liked");
-    } else {
-      this._handleAddLike(this._cardId);
-      this._likeBtn.classList.add("card_liked");
-    }
-  }
+likeToggle(data) {
+  this._likeBtn.classList.toggle('card_liked');
+  this._likes = data.likes;
+  this._setLikeCount();
+}
 
   // Set card listeners
   _setEventListeners() {
@@ -65,7 +55,11 @@ export class Card {
       this._handleCardClick({ name: this._name, link: this._link });
     });
     this._likeBtn.addEventListener("click", () => {
-      this.likeToggle();
+      if (this._likes.some(like => like._id === this._userId)) {
+        this._handleRemoveLike(this._cardId);
+      } else {
+        this._handleAddLike(this._cardId);
+      }
     });
 
     if (this._cardOwnerId === this._userId.id) {
@@ -88,6 +82,8 @@ export class Card {
     this._cardElement = this._getElement();
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._likeBtn = this._cardElement.querySelector(".card__like");
+    this._cardLikeCountElement =
+      this._cardElement.querySelector(".card__like-count");
     this._cardElement.id = this._cardId;
     this._cardElement.querySelector(".card__text").textContent = this._name;
     this._cardImage.src = this._link;
