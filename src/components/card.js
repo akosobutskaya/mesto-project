@@ -62,7 +62,7 @@ likeToggle(data) {
       }
     });
 
-    if (this._cardOwnerId === this._userId.id) {
+    if (this._cardOwnerId === this._userId) {
       this._deleteBtn.addEventListener("click", () => {
         this._handleDelBtn(this._cardId);
       });

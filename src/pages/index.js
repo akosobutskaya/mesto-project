@@ -103,8 +103,14 @@ const createCard = (cardData) => {
         });
     },
     handleDelBtn: (cardId) => {
-      api.deleteCard(cardId).then(() => { });
-    },
+      api.deleteCard(cardId)
+      .then(() => { 
+        newCard.deleteCard();
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err}`);
+      })
+    }
   });
   return newCard.generate();
 };
