@@ -28,6 +28,7 @@ export class Popup {
 
     close() {
         this._popup.classList.remove('popup_opened');
+        this._removeEventListeners();
     }
 
     _setEventListeners() {
