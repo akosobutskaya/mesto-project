@@ -26,7 +26,8 @@ api.loadData()
     const [userData, cardsData] = data;
     userId = userData._id;
     userInfo.setUserInfo(userData);
-    cardsList.renderItems(cardsData);
+    const cardsDataReversed = cardsData.reverse();
+    cardsList.renderItems(cardsDataReversed);
   })
   .catch(err => console.log(err));
 
